@@ -1,0 +1,6 @@
+const NavBarComponent = () => {
+    return{
+        render: () => {
+            
+    }
+}}
