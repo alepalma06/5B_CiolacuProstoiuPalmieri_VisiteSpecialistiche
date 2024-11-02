@@ -1,4 +1,4 @@
-const generateFetchComponent = () => {
+const generateFetchComponent = (conf) => {
     // GRAZIE CECIRE
     return {
         setData: (data) => {
@@ -39,6 +39,11 @@ const generateFetchComponent = () => {
     }
 };
 
-fetch("conf.json").then(r => r.json()).then(conf => {
-    const istFetch = generateFetchComponent();
-});
+
+var myModal = document.getElementById('myModal')
+var myInput = document.getElementById('myInput')
+
+myModal.addEventListener('shown.bs.modal', function () {
+  myInput.focus()
+  console.log("MODALE")
+})
