@@ -1,3 +1,5 @@
+import moment from "moment";
+console.log(moment.now())
 const generateFetchComponent = (conf) => {
     // GRAZIE CECIRE
     return {

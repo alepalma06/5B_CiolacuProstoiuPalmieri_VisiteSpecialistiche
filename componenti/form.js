@@ -9,12 +9,10 @@ const createForm = (parentElement) => {
             //creazione input
             parentElement.innerHTML = 
                 `<div>Data<br/><input id="data" type="date" class="form-label form-control"/></div>` +
-                `<div>Ora<br/><input id="ora" type="dropdown" class="form-label form-control"/></div>` +
-                `<div>Nome<br/><input id="nome" type="text" class="form-label form-control"/></div>` +
-                `<button type='button' id='submit' class="btn btn-primary">Conferma</button>`;
-                `<button type='button' id='annulla' class="btn btn-primary">Annulla</button>`;
+                `<div>Ora<br/><select id="ora" name="ora" class="form-select"><option value=8>8</option><option value=9>9</option><option value=10>10</option><option value=11>11</option><option value=12>12</option></select></div>` +
+                `<div>Nome<br/><input id="nome" type="text" class="form-label form-control"/></div>`
             //lettura valori inseriti
-            document.querySelector("#submit").onclick = () => {
+            document.querySelector("#Prenota").onclick = () => {
                 const result = {
                     data: document.querySelector("#data").value,
                     ora: document.querySelector("#ora").value,
