@@ -17,7 +17,7 @@
     <!-- Bottone trigger -->
         <button type="button" class="btn btn-success btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">Prenota -></button>
     <!-- Modale -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade modalltop" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header">
@@ -28,7 +28,7 @@
                     
                 </div>
                 <div class="modal-footer">
-                    <button id="Annulla" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                    <button id="Annulla" type="button" class="btn btn-outline-danger btn-lg" data-bs-dismiss="modal">Annulla</button>
                     <button id="Prenota" type="button" class="btn btn-outline-success btn-lg">Prenota -> </button>
                 </div>
                 </div>
@@ -37,11 +37,15 @@
     </div>
 
     <div id="divBtn" class="container mt-3 d-flex justify-content-between">
-        <button id="precedente" type="button" class="btn btn-primary btn-lg">Precedente</button>
-        <button id="successiva" type="button" class="btn btn-primary btn-lg">Successiva</button>
+        <button id="precedente" type="button" class="btn btn-info btn-lg"><- Precedente</button>
+        <button id="successiva" type="button" class="btn btn-info btn-lg">Successiva -></button>
     </div>
-    <div class="container  d-flex justify-content-center mt-3"><table id="tabella" class="table table-bordered border-info bg-light text-center align-middle"></table></div>
-    <footer class="blockquote-footer text-center mt-auto">
+    <div class="container  d-flex justify-content-center mt-3">
+        <table id="tabella" class="table table-bordered border-info bg-light text-center align-middle">
+
+    </table></div>
+    
+    <footer class="blockquote-footer text-center py-3 mt-auto mt-3">
         <p>Made By: Tommaso Ciolacu, Ciprian Prostoiu & Alessandro Palmieri</p>
     </footer>
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

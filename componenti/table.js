@@ -57,14 +57,16 @@ export const tableComponent = () => {
             });
             date.setDate(date.getDate() + -5); 
             ore.forEach(ora => {
-                html += "<tr>"+"<td>"+ ora +"</td>";
+                html += `<tr class ="tbl1">`+"<td>"+ ora +"</td>";
                 for (let i = 0; i < lisSett.length; i++) {
                     let giorno=exportData(date).split("-").join("");
                     let chiave= tipo +"-"+giorno+"-"+ora;
                     if (chiave in data) {
+                        // se fa parte del dizionario stampa
                         console.log(chiave)
-                        html += "<td>" + data[chiave]+ "</td>"; // Inserisci il nome della prenotazione
+                        html += `<td class="table-info">` + data[chiave]+ "</td>"; // Inserisci il nome della prenotazione
                     } else {
+                        // cella vuota
                         console.log(data)
                         html += `<td></td>`; // Celle vuote o con contenuto da aggiungere
                     }
