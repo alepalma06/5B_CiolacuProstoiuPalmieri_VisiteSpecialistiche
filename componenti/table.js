@@ -6,7 +6,7 @@ let starDay = 0;
 const tableComponent = () => {
     let templateGiorni = `
         <tr class="tbl1">
-            <td>Giorni:</td>
+            <td></td>
             <td>#D</td>
             <td>#D</td>
             <td>#D</td>
