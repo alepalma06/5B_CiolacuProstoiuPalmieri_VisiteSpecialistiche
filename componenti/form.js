@@ -1,4 +1,4 @@
-const createForm = (parentElement) => {
+export const createForm = (parentElement) => {
     let dato = {};
     let callback = null;
     let tipo="Cardiologia";
@@ -9,7 +9,7 @@ const createForm = (parentElement) => {
         exportDiz: () => {
             
         },
-        render: () => {
+        render: (table1) => {
             //creazione input
             parentElement.innerHTML = 
                 `<div>Data<br/><input id="data" type="date" class="form-label form-control"/></div>` +
@@ -28,36 +28,16 @@ const createForm = (parentElement) => {
                 } else {
                     // AGGIUNTA DELLA DATA NEL DIZIONARIO
                     const datasenzatrattini = data.split("-").join("");
+                    const result={}
                     let chiave = tipo+"-"+datasenzatrattini+"-"+ora;
                     dato[chiave] = nome;
                     outputform.innerHTML = "OK";
                     console.log(dato);
-                }
-
-                const result = { data, ora, nome };
-                if (callback) { 
-                    callback(result);  
+                    table1.setData(dato)
+                    table1.render()
                 }
             };
 
         }
     };
 };
-//creazione
-const formElement = document.getElementById("form");
-const form = createForm(formElement);
-
-form.onsubmit((resultform) => { // 
-    console.log(resultform, table1.data);
-    //table1.remove(resultform);
-    document.querySelector("#data").value = "";
-    document.querySelector("#ora").value = "";
-    document.querySelector("#nome").value = "";
-    /*dataProva = new Date();
-    dataProvaStr = dataProva.getFullYear() + "-" + (dataProva.getMonth() + 1) + "-" + dataProva.getDate()  
-    console.log(dataProvaStr);*/
-    
-    
-});
-
-form.render();

@@ -1,6 +1,4 @@
-const navbar = document.getElementById("navbar");
-
-const NavBarComponent = (conf) => {
+export const NavBarComponent = (conf) => {
     let template = `
     <input type="radio" class="btn-check" name="btnradio" value="#TIPO" id="#ID" #CHECKED>
     <label class="btn btn-outline-info btn-lg" for="#ID">#CAT</label>`
@@ -10,7 +8,7 @@ const NavBarComponent = (conf) => {
             // FUNZIONA CHE DETERMINA DOVE POSIZIONARE LA RENDER
             parentElement = pr;
         }
-        ,render: () => {
+        ,render: (form,table1) => {
             // FUNZIONE CHE INIETTA DENTRO IL CONTAINER IL CSS
             let html = "";
             conf["tipologie"].forEach((tip,index) => {
@@ -28,15 +26,11 @@ const NavBarComponent = (conf) => {
             document.querySelectorAll(".btn-check").forEach((radio) => {
                 radio.onclick = () => {
                     form.setType(radio.value)//valore della scelta
+                    table1.setTipo(radio.value);
+                    table1.render()
                 };
             });
 
         }
     }
 }
-fetch("conf.json").then(r => r.json()).then(conf => {
-    const navBarComp = NavBarComponent(conf);
-    navBarComp.setParentElement(navbar);
-    navBarComp.render();
-    //console.log(fetchComp)
-});

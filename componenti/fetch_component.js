@@ -1,6 +1,4 @@
-import moment from 'moment';
-
-const generateFetchComponent = () => {
+export const generateFetchComponent = () => {
     // GRAZIE CECIRE
     let conf; 
     return {

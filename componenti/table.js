@@ -1,9 +1,7 @@
-const tabella = document.getElementById("tabella");
-const precendente = document.getElementById("precedente");
-const successiva = document.getElementById("successiva");
-let starDay = 0;
-
-const tableComponent = () => {
+export const tableComponent = () => {
+    let data={}
+    let tipo="Cardiologia";
+    let PrecedenteSuccessiva=0
     let templateGiorni = `
         <tr class="tbl1">
             <td></td>
@@ -17,10 +15,13 @@ const tableComponent = () => {
     let parentElement;
 
     return {
+        setData: (dato) =>{data=dato},
         setParentElement: (pr) => {
             parentElement = pr;
         },
-        render: (PrecedenteSuccessiva) => {
+        start:(startday)=> {PrecedenteSuccessiva=startday},
+        setTipo: (tip)=>{tipo=tip;},
+        render: () => {
             const exportData = (date) => {
                 // FUNZIONE CHE FORMATTA LA DATA
                 let d = date.getDate().toString().padStart(2, '0'); // SE LEN MINORE DI 2 AGGIUNGE "0"
@@ -30,7 +31,7 @@ const tableComponent = () => {
             };
 
             const lisSett = ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì"];
-            const ore = ["8:00", "9:00", "10:00", "11:00", "12:00"];
+            const ore = ["8", "9", "10", "11", "12"];
             let html = templateGiorni;
             let date = new Date();
             let giornoCorrente = date.getDay() - PrecedenteSuccessiva; // serve per i bottoni precendente e succssivo
@@ -54,11 +55,22 @@ const tableComponent = () => {
 
                 //AGGIUNGI CHIAVE
             });
+            date.setDate(date.getDate() + -5); 
             ore.forEach(ora => {
-                html += `<tr><td>${ora}</td>`;
+                html += "<tr>"+"<td>"+ ora +"</td>";
                 for (let i = 0; i < lisSett.length; i++) {
-                    html += `<td>#PR</td>`; // Celle vuote o con contenuto da aggiungere
+                    let giorno=exportData(date).split("-").join("");
+                    let chiave= tipo +"-"+giorno+"-"+ora;
+                    if (chiave in data) {
+                        console.log(chiave)
+                        html += "<td>" + data[chiave]+ "</td>"; // Inserisci il nome della prenotazione
+                    } else {
+                        console.log(data)
+                        html += `<td></td>`; // Celle vuote o con contenuto da aggiungere
+                    }
+                    date.setDate(date.getDate() + 1);
                 }
+                date.setDate(date.getDate() + -5); 
                 html += `</tr>`;
             });
             
@@ -66,23 +78,3 @@ const tableComponent = () => {
         }
     }
 };
-
-
-
-fetch("conf.json").then(r => r.json()).then(conf => {
-    console.log("CONF:", conf);
-    const table1 = tableComponent();
-    table1.setParentElement(tabella);
-    table1.render(starDay);
-    console.log("Renderizzatoe");
-    precendente.onclick = () => {
-        starDay -= 7;
-        table1.render(starDay);
-    }
-
-    successiva.onclick = () => {
-        starDay += 7;
-        table1.render(starDay);
-    }
-});
-
