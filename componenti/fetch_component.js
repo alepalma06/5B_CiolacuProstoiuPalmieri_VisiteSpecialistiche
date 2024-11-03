@@ -1,4 +1,4 @@
-import moment from "moment";
+import moment from "./node_modules/moment/src/moment"
 console.log(moment.now())
 const generateFetchComponent = (conf) => {
     // GRAZIE CECIRE
