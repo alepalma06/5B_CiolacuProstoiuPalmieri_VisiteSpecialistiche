@@ -1,8 +1,12 @@
-import moment from "moment";
-console.log(moment.now())
-const generateFetchComponent = (conf) => {
+import moment from 'moment';
+
+const generateFetchComponent = () => {
     // GRAZIE CECIRE
+    let conf; 
     return {
+        caricaDati: (fileConf) => {
+            conf = fileConf;
+        },
         setData: (data) => {
             return new Promise((resolve, reject) => {
                 fetch("https://ws.cipiaceinfo.it/cache/set", {
@@ -40,5 +44,6 @@ const generateFetchComponent = (conf) => {
         }
     }
 };
+
 
 
