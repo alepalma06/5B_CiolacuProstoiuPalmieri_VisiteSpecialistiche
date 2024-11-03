@@ -38,4 +38,5 @@ fetch("conf.json").then(r => r.json()).then(conf => {
     const navBarComp = NavBarComponent(conf);
     navBarComp.setParentElement(navbar);
     navBarComp.render();
+    //console.log(fetchComp)
 });
