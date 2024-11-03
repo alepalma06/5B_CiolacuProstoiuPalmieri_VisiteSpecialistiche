@@ -2,10 +2,9 @@ const navbar = document.getElementById("navbar");
 
 const NavBarComponent = (conf) => {
     let template = `
-    <input type="radio" class="btn-check" name="btnradio" id="#ID" #CHECKED>
+    <input type="radio" class="btn-check" name="btnradio" value="#TIPO" id="#ID" #CHECKED>
     <label class="btn btn-outline-info btn-lg" for="#ID">#CAT</label>`
     let parentElement;
-    
     return{
         setParentElement: (pr) => {
             // FUNZIONA CHE DETERMINA DOVE POSIZIONARE LA RENDER
@@ -14,18 +13,23 @@ const NavBarComponent = (conf) => {
         ,render: () => {
             // FUNZIONE CHE INIETTA DENTRO IL CONTAINER IL CSS
             let html = "";
-            let c = 0;
-            conf["tipologie"].forEach(tip => {
+            conf["tipologie"].forEach((tip,index) => {
                 // GENERA CODICE
-                if (c == 0) {
+                let radioId = "radio" + index;
+                if ( index === 0) {
                     //PER IL CHECKED [SE è IL PRIMO ALLORA SARà CHECKED]
-                    html += template.replace("#ID", ("radio" + c)).replace("#CAT", tip).replace("#CHECKED", "checked");
+                    html += template.replace(/#ID/g, radioId).replace("#CAT", tip).replace("#TIPO", tip) .replace("#CHECKED", "checked");
                 } else {
-                    html += template.replace("#ID", ("radio" + c)).replace("#CAT", tip).replace("#CHECKED", "");
+                    html += template.replace(/#ID/g,radioId) .replace("#CAT", tip).replace("#TIPO", tip).replace("#CHECKED", "");
                 }
-                c++;
             });
             parentElement.innerHTML = html;
+
+            document.querySelectorAll(".btn-check").forEach((radio) => {
+                radio.onclick = () => {
+                    console.log("Selected value:", radio.value);//scelta che abbiamo selezionato
+                };
+            });
 
         }
     }
