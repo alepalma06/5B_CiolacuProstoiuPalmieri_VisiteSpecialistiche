@@ -28,6 +28,8 @@ const tableComponent = (conf) => {
 }
 
 
+
+
 fetch("conf.json").then(r => r.json()).then(conf => {
     console.log("CONF : ", conf);
     const fetchComp = generateFetchComponent();
