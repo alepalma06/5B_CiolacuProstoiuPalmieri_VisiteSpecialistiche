@@ -30,6 +30,7 @@ const tableComponent = () => {
             };
 
             const lisSett = ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì"];
+            const ore = ["8:00", "9:00", "10:00", "11:00", "12:00"];
             let html = templateGiorni;
             let date = new Date();
             let giornoCorrente = date.getDay() - PrecedenteSuccessiva; // serve per i bottoni precendente e succssivo
@@ -53,7 +54,14 @@ const tableComponent = () => {
 
                 //AGGIUNGI CHIAVE
             });
-
+            ore.forEach(ora => {
+                html += `<tr><td>${ora}</td>`;
+                for (let i = 0; i < lisSett.length; i++) {
+                    html += `<td>#PR</td>`; // Celle vuote o con contenuto da aggiungere
+                }
+                html += `</tr>`;
+            });
+            
             parentElement.innerHTML = html;
         }
     }
