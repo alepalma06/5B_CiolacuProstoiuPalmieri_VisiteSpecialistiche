@@ -1,40 +1,80 @@
 const tabella = document.getElementById("tabella");
-const tableComponent = (conf) => {
-    let templateGiorni = `
-     <tr class="tbl1">
-                <td>Giorni:</td>
-                <td>#LUNEDI</td>
-                <td>#MARTED</td>
-                <td>#MERCOL</td>
-                <td>#GIOVED</td>
-                <td>#VENERD</td>
-            </tr>
-    `
-    let templateRow;
-    let parentElement;
-    let dizPrenotazioni = {};
-    return{
-        setParentElement: (pr) => {
-            // FUNZIONA CHE DETERMINA DOVE POSIZIONARE LA RENDER
-            parentElement = pr;
-        }
-        ,render: () => {
-            // FUNZIONE CHE INIETTA DENTRO IL CONTAINER IL CSS
-            let html = "";
-            
+const precendente = document.getElementById("precedente");
+const successiva = document.getElementById("successiva");
+let starDay = 0;
 
+const tableComponent = () => {
+    let templateGiorni = `
+        <tr class="tbl1">
+            <td>Giorni:</td>
+            <td>#D</td>
+            <td>#D</td>
+            <td>#D</td>
+            <td>#D</td>
+            <td>#D</td>
+        </tr>
+    `;
+    let parentElement;
+
+    return {
+        setParentElement: (pr) => {
+            parentElement = pr;
+        },
+        render: (PrecedenteSuccessiva) => {
+            const exportData = (date) => {
+                // FUNZIONE CHE FORMATTA LA DATA
+                let d = date.getDate().toString().padStart(2, '0'); // SE LEN MINORE DI 2 AGGIUNGE "0"
+                let m = (date.getMonth() + 1).toString().padStart(2, '0');
+                let y = date.getFullYear();
+                return y + "-" + m + "-" + d;
+            };
+
+            const lisSett = ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì"];
+            let html = templateGiorni;
+            let date = new Date();
+            let giornoCorrente = date.getDay() - PrecedenteSuccessiva; // serve per i bottoni precendente e succssivo
+
+            // SE E' DOMENICA [0] OPPURE SABATO [6] passa al lunedì dopo
+            if (giornoCorrente === 6) {
+                date.setDate(date.getDate() + 2); 
+            } else if (giornoCorrente === 0) {
+                date.setDate(date.getDate() + 1); 
+            } else {
+                date.setDate(date.getDate() - (giornoCorrente - 1)); //PER TORNARE SEMPRE A LUNEDì 
+            }
+
+            
+            lisSett.forEach((day, index) => {
+                //CAMBIO HTML
+                let giornoTab = day + "<br>" + exportData(date);
+                html = html.replace("#D", giornoTab);
+
+                date.setDate(date.getDate() + 1);  //GIORNO DOPO
+
+                //AGGIUNGI CHIAVE
+            });
+
+            parentElement.innerHTML = html;
         }
     }
-}
-
+};
 
 
 
 fetch("conf.json").then(r => r.json()).then(conf => {
-    console.log("CONF : ", conf);
-    const fetchComp = generateFetchComponent();
-    fetchComp.caricaDati(conf);
-    
- });
+    console.log("CONF:", conf);
+    const table1 = tableComponent();
+    table1.setParentElement(tabella);
+    table1.render(starDay);
+    console.log("Renderizzatoe");
+    precendente.onclick = () => {
+        starDay -= 7;
+        table1.render(starDay);
+    }
 
+    successiva.onclick = () => {
+        starDay += 7;
+        table1.render(starDay);
+    }
+});
 

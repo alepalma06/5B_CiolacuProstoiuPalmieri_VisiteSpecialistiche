@@ -6,6 +6,9 @@ const createForm = (parentElement) => {
         setLabels: (labels) => { dato = labels; }, 
         onsubmit: (callbackInput) => { callback = callbackInput; },
         setType: (tip)=>{tipo=tip;console.log(tipo)},
+        exportDiz: () => {
+            
+        },
         render: () => {
             //creazione input
             parentElement.innerHTML = 
@@ -23,6 +26,7 @@ const createForm = (parentElement) => {
                 if (data === "" || ora === "" || nome === "") {
                     outputform.innerHTML = "KO";
                 } else {
+                    // AGGIUNTA DELLA DATA NEL DIZIONARIO
                     const datasenzatrattini = data.split("-").join("");
                     let chiave = tipo+"-"+datasenzatrattini+"-"+ora;
                     dato[chiave] = nome;
