@@ -1,10 +1,11 @@
 const createForm = (parentElement) => {
     let data = {};
     let callback = null;
-
+    let tipo="Cardiologia";
     return {
         setLabels: (labels) => { data = labels; }, 
         onsubmit: (callbackInput) => { callback = callbackInput; },
+        setType: (tip)=>{tipo=tip;console.log(tipo)},
         render: () => {
             //creazione input
             parentElement.innerHTML = 

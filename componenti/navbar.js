@@ -27,6 +27,7 @@ const NavBarComponent = (conf) => {
 
             document.querySelectorAll(".btn-check").forEach((radio) => {
                 radio.onclick = () => {
+                    form.setType(radio.value)
                     console.log("Selected value:", radio.value);//scelta che abbiamo selezionato
                 };
             });
