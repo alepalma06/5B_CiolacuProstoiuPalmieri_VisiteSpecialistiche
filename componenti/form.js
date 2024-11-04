@@ -9,7 +9,7 @@ export const createForm = (parentElement) => {
         exportDiz: () => {
             
         },
-        render: (table1) => {
+        render: (table1,compFetch) => {
             //creazione input
             parentElement.innerHTML = 
                 `<div>Data<br/><input id="data" type="date" class="form-label form-control"/></div>` +
@@ -33,11 +33,15 @@ export const createForm = (parentElement) => {
                     dato[chiave] = nome;
                     outputform.innerHTML = "OK";
                     console.log(dato);
-                    table1.setData(dato)
-                    table1.render()
+                    compFetch.setData(dato).then(data => {
+                        compFetch.getData().then(data=>{
+                            dato=data;
+                            table1.setData(data)
+                            table1.render()
+                        })
+                        })}
                 }
-            };
+            }
 
         }
     };
-};
