@@ -23,7 +23,9 @@ export const createForm = (parentElement) => {
                 const nome = document.querySelector("#nome").value;
                 const outputform = document.getElementById("outputform");
 
-                if (data === "" || ora === "" || nome === "") {
+                let date = new Date(data);
+                let giornoCorrente = date.getDay()
+                if (data === "" || ora === "" || nome === "" || giornoCorrente === 0 || giornoCorrente === 6) {
                     outputform.innerHTML = "KO";
                 } else {
                     // AGGIUNTA DELLA DATA NEL DIZIONARIO
