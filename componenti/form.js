@@ -5,7 +5,7 @@ export const createForm = (parentElement) => {
     return {
         setLabels: (labels) => { dato = labels; }, 
         onsubmit: (callbackInput) => { callback = callbackInput; },
-        setType: (tip)=>{tipo=tip;console.log(tipo)},
+        setType: (tip)=>{tipo=tip;},
         exportDiz: () => {
             
         },
@@ -39,8 +39,7 @@ export const createForm = (parentElement) => {
                     else{
                         dato[chiave] = nome;
                         outputform.innerHTML = "OK";
-                        console.log(dato);
-                        
+
                         compFetch.setData(dato).then(data => {
                             compFetch.getData().then(data=>{
                                 dato=data;

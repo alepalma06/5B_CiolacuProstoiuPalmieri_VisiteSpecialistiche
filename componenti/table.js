@@ -63,11 +63,9 @@ export const tableComponent = () => {
                     let chiave= tipo +"-"+giorno+"-"+ora;
                     if (chiave in data) {
                         // se fa parte del dizionario stampa
-                        console.log(chiave)
                         html += `<td class="table-info">` + data[chiave]+ "</td>"; // Inserisci il nome della prenotazione
                     } else {
                         // cella vuota
-                        console.log(data)
                         html += `<td></td>`; // Celle vuote o con contenuto da aggiungere
                     }
                     date.setDate(date.getDate() + 1);
