@@ -37,4 +37,12 @@ fetch("conf.json").then(r => r.json()).then(conf => {
     navBarComp.setParentElement(navbar);
     navBarComp.render(form,table1);
     form.render(table1,compFetch)
+    setInterval(()=>{
+        compFetch.getData().then(data => {
+            form.setLabels(data);
+            table1.setData(data); // Imposta i dati nel componente tabella
+            table1.render(starDay);// Renderizza la tabella con i dati recuperati
+            
+        });
+    },300000)
 });
