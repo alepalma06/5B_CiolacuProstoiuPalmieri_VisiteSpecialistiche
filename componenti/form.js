@@ -30,16 +30,27 @@ export const createForm = (parentElement) => {
                     const datasenzatrattini = data.split("-").join("");
                     const result={}
                     let chiave = tipo+"-"+datasenzatrattini+"-"+ora;
-                    dato[chiave] = nome;
-                    outputform.innerHTML = "OK";
-                    console.log(dato);
-                    compFetch.setData(dato).then(data => {
-                        compFetch.getData().then(data=>{
-                            dato=data;
-                            table1.setData(data)
-                            table1.render()
-                        })
+                    if(chiave in dato){
+                        outputform.innerHTML="KO";
+                        
+                    }
+                    else{
+                        dato[chiave] = nome;
+                        outputform.innerHTML = "OK";
+                        console.log(dato);
+                        
+                        compFetch.setData(dato).then(data => {
+                            compFetch.getData().then(data=>{
+                                dato=data;
+                                table1.setData(data)
+                                table1.render()
+                            })
                         })}
+                }
+                document.querySelector("#data").value="";
+                document.querySelector("#ora").value="8";
+                document.querySelector("#nome").value="";
+
                 }
             }
 
